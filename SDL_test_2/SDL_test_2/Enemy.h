@@ -49,7 +49,7 @@ void Enemy::Update() {
 		a.x += ENEMY_S;
 		bool c = false;
 		for (Projectile &p : Projectile::Bullets) {
-			c = c || (CheckCollision(a.x, a.y, a.w, a.y, p.x, p.y, p.w, p.h));
+			c = c || (CheckCollision(a.x, a.y, a.w, a.h, p.x, p.y, p.w, p.h));
 		}
 		if (a.x + a.w > 0 && !c) {
 			present.push_back(a);
