@@ -44,16 +44,20 @@ void Enemy::Draw(SDL_Renderer* ren) {
 
 void Enemy::Update() {
 	std::vector<Enemy>present;
-	std::vector<Projectile*>dead;
 	for (Enemy &a : Enemies) {
 		a.x += ENEMY_S;
 		bool c = false;
 		for (Projectile &p : Projectile::Bullets) {
 			c = c || (CheckCollision(a.x, a.y, a.w, a.h, p.x, p.y, p.w, p.h));
+			if (c) {
+				Projectile::Bullets.pop_back();
+				break;
+			}
 		}
 		if (a.x + a.w > 0 && !c) {
 			present.push_back(a);
 		}
+		break;
 	}
-		Enemies = present;
+	Enemies = present;
 }
